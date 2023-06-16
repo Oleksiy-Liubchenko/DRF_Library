@@ -32,3 +32,25 @@ class BorrowingsSerializer(serializers.ModelSerializer):
         borrowing = Borrowing.objects.create(**validated_data)
 
         return borrowing
+
+
+class BorrowingsListSerializer(BorrowingsSerializer):
+    book = serializers.CharField(source="book.title")
+    user = serializers.CharField(source="user.email")
+
+    class Meta:
+        model = Borrowing
+        fields = (
+            "id",
+            "borrow_date",
+            "expected_return_date",
+            "actual_return_date",
+            "book",
+            "user"
+        )
+
+
+class BorrowingsDetailSerializer(BorrowingsListSerializer):
+    class Meta:
+        model = Borrowing
+        fields = "__all__"
