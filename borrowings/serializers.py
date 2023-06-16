@@ -26,12 +26,21 @@ class BorrowingsSerializer(serializers.ModelSerializer):
         return user.id
 
     def create(self, validated_data):
-        """Creating instance with reassigned user"""
-        user = self.context["request"].user
-        validated_data["user"] = user
-        borrowing = Borrowing.objects.create(**validated_data)
+        """Creating instance with reassigned user.
+        Also check is library have book inventory for borrowing"""
 
-        return borrowing
+        user = self.context["request"].user
+        book = validated_data["book"]
+
+        if book.inventory > 0:
+            book.inventory -= 1
+            book.save()
+
+            validated_data["user"] = user
+            borrowing = Borrowing.objects.create(**validated_data)
+
+            return borrowing
+        raise serializers.ValidationError("No inventory for this book")
 
 
 class BorrowingsListSerializer(BorrowingsSerializer):
