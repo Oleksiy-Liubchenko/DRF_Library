@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from borrowings.models import Borrowing
@@ -14,6 +15,25 @@ class BorrowingsViewSet(viewsets.ModelViewSet):
     queryset = Borrowing.objects.all()
     model = Borrowing
     serializer_class = BorrowingsSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        """Two filters: 1) is_active means is book borrowing still active
+        2) user_id allow admin to see all borrowings of any user"""
+
+        is_active = self.request.query_params.get("is_active")
+        user_id = self.request.query_params.get("user_id")
+        queryset = self.queryset.filter(user=self.request.user)
+
+        if self.request.user.is_staff:
+            queryset = self.queryset.all()
+            if user_id:
+                queryset = queryset.filter(user_id=user_id)
+
+        if is_active:
+            queryset = queryset.filter(actual_return_date__isnull=True)
+
+        return queryset
 
     def get_serializer_class(self):
         if self.action == "list":
