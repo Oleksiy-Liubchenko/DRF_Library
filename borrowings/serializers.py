@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import serializers
 
 from borrowings.models import Borrowing
@@ -12,7 +14,6 @@ class BorrowingsSerializer(serializers.ModelSerializer):
             "id",
             "borrow_date",
             "expected_return_date",
-            "actual_return_date",
             "book",
             "user"
         )
@@ -63,3 +64,27 @@ class BorrowingsDetailSerializer(BorrowingsListSerializer):
     class Meta:
         model = Borrowing
         fields = "__all__"
+
+
+class BorrowingsReturnSerializer(serializers.ModelSerializer):
+    """Update book inventory count when user return book.
+    On book return page only allow to press "post",
+    then actual_return_date will be today date
+    """
+    class Meta:
+        model = Borrowing
+        fields = ("id", "actual_return_date",)
+        read_only_fields = ("actual_return_date",)
+
+    def update(self, instance, validated_data):
+        if instance.actual_return_date:
+            raise serializers.ValidationError("This book has already been returned")
+
+        instance.actual_return_date = datetime.date.today()
+        instance.save()
+
+        book = instance.book
+        book.inventory += 1
+        book.save()
+
+        return instance
