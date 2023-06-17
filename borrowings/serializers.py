@@ -3,6 +3,7 @@ import datetime
 from rest_framework import serializers
 
 from borrowings.models import Borrowing
+from telegram_bot.bot_send_message import send_telegram_message_when_borrowing
 
 
 class BorrowingsSerializer(serializers.ModelSerializer):
@@ -39,6 +40,9 @@ class BorrowingsSerializer(serializers.ModelSerializer):
 
             validated_data["user"] = user
             borrowing = Borrowing.objects.create(**validated_data)
+
+            message = f"New borrowing created: {borrowing.book.title} by {borrowing.user.email}"
+            send_telegram_message_when_borrowing(message)
 
             return borrowing
         raise serializers.ValidationError("No inventory for this book")

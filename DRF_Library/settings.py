@@ -157,3 +157,6 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
 }
+
+TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
+TG_CHAT_ID = os.getenv("TG_CHAT_ID")
