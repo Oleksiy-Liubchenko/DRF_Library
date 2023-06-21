@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -52,3 +53,23 @@ class BorrowingsViewSet(viewsets.ModelViewSet):
         serializer.save()
 
         return Response(serializer.data)
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="is_active",
+                description="Filtering is book still in active(borrowing status)",
+                required=False,
+                type=bool
+            ),
+            OpenApiParameter(
+                name="user_id",
+                description="Filtering by user id (only for admins) "
+                            "to see borrowings of concreate user",
+                required=False,
+                type=int
+            )
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
