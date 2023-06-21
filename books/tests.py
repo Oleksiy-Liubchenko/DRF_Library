@@ -5,7 +5,6 @@ from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
 from books.models import Books
-from books.serializers import BooksSerializer
 
 
 class BooksViewSetTests(APITestCase):

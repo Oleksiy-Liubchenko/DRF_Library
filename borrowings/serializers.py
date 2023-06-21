@@ -75,6 +75,7 @@ class BorrowingsReturnSerializer(serializers.ModelSerializer):
     On book return page only allow to press "post",
     then actual_return_date will be today date
     """
+
     class Meta:
         model = Borrowing
         fields = ("id", "actual_return_date",)
