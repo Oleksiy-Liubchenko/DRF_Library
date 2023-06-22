@@ -82,8 +82,11 @@ WSGI_APPLICATION = "DRF_Library.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.environ["POSTGRES_HOST"],
+        "NAME": os.environ["POSTGRES_DB"],
+        "USER": os.environ["POSTGRES_USER"],
+        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
     }
 }
 
@@ -140,9 +143,9 @@ REST_FRAMEWORK = {
     ),
 }
 SPECTACULAR_SETTINGS = {
-    "TITLE": 'Library Project API',
-    "DESCRIPTION": 'Your project description',
-    "VERSION": '1.0.0',
+    "TITLE": "Library Project API",
+    "DESCRIPTION": "Service to borrow books",
+    "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
