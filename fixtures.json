@@ -1,0 +1,126 @@
+[
+  {"_comment": "pass is - 12345678 to all users",
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+      "email": "Admin@library.com",
+      "password": "pbkdf2_sha256$600000$0Nko6ExMX3daThFD7ic22S$dvCyOE4u++kL9S/Ih69N6gumyYUYl27e6i3wnnFBFIs=",
+      "first_name": "Admin",
+      "last_name": "Admin",
+      "is_superuser": true,
+      "is_staff": true
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 2,
+    "fields": {
+      "email": "Greta@user.com",
+      "password": "pbkdf2_sha256$600000$0Nko6ExMX3daThFD7ic22S$dvCyOE4u++kL9S/Ih69N6gumyYUYl27e6i3wnnFBFIs=",
+      "first_name": "Greta",
+      "last_name": "Thunberg",
+      "is_superuser": false,
+      "is_staff": false
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 3,
+    "fields": {
+      "email": "Antonio@user.com",
+      "password": "pbkdf2_sha256$600000$0Nko6ExMX3daThFD7ic22S$dvCyOE4u++kL9S/Ih69N6gumyYUYl27e6i3wnnFBFIs=",
+      "first_name": "Antonio",
+      "last_name": "Guterres",
+      "is_superuser": false,
+      "is_staff": false
+    }
+  },
+  {
+    "model": "books.books",
+    "pk": 1,
+    "fields": {
+      "title": "All Quiet on the Western Front",
+      "author": "Erich Maria Remarque",
+      "cover": "S",
+      "inventory": "2",
+      "daily_fee": "1.00"
+    }
+  },
+  {
+    "model": "books.books",
+    "pk": 2,
+    "fields": {
+      "title": "The Night in Lisbon",
+      "author": "Erich Maria Remarque",
+      "cover": "H",
+      "inventory": "3",
+      "daily_fee": "1.30"
+    }
+  },
+  {
+    "model": "books.books",
+    "pk": 3,
+    "fields": {
+      "title": "Rich Man, Poor Man",
+      "author": "Irvin Show",
+      "cover": "H",
+      "inventory": "5",
+      "daily_fee": "2.30"
+    }
+  },
+  {
+    "model": "books.books",
+    "pk": 4,
+    "fields": {
+      "title": "Lucy Crown",
+      "author": "Irvin Show",
+      "cover": "S",
+      "inventory": "1",
+      "daily_fee": "0.99"
+    }
+  },
+  {
+    "model": "borrowings.borrowing",
+    "pk": 1,
+    "fields": {
+      "borrow_date": "2023-05-25",
+      "expected_return_date": "2023-06-25",
+      "actual_return_date": "2023-06-25",
+      "book_id": 1,
+      "user_id": 2
+    }
+  },
+  {
+    "model": "borrowings.borrowing",
+    "pk": 2,
+    "fields": {
+      "borrow_date": "2023-05-07",
+      "expected_return_date": "2023-06-20",
+      "actual_return_date": "2023-06-23",
+      "book_id": 2,
+      "user_id": 3
+    }
+  },
+  {
+    "model": "borrowings.borrowing",
+    "pk": 3,
+    "fields": {
+      "borrow_date": "2023-05-07",
+      "expected_return_date": "2023-06-20",
+      "actual_return_date": null,
+      "book_id": 2,
+      "user_id": 3
+    }
+  },
+  {
+    "model": "borrowings.borrowing",
+    "pk": 4,
+    "fields": {
+      "borrow_date": "2023-06-02",
+      "expected_return_date": "2023-06-22",
+      "actual_return_date": null,
+      "book_id": 2,
+      "user_id": 1
+    }
+  }
+]
