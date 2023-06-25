@@ -25,6 +25,9 @@ source venv/bin/activate #for iOS or Linux
 venv/Scripts/activate #for Windows
 pip install -r requirements.txt
 python manage.py loaddata fixtures.json 
+
+user email - Admin@library.com
+user password - 12345678
 ```
 ".env_sample" file change name to ".env"  and fill your data
 ```
