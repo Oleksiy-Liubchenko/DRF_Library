@@ -24,7 +24,10 @@ python -m venv venv
 source venv/bin/activate #for iOS or Linux
 venv/Scripts/activate #for Windows
 pip install -r requirements.txt
-python manage.py loaddata fixtures.json 
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata fixtures.json
+python manage.py runserver
 
 user email - Admin@library.com
 user password - 12345678
