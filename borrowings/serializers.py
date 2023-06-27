@@ -19,7 +19,7 @@ class BorrowingsSerializer(serializers.ModelSerializer):
             "user"
         )
 
-    def get_user(self, obj):
+    def get_user(self, obj: Borrowing) -> int:
         """Reassign user for borrowing book
         (instead user could borrow book not
          for himself, for user 2 for ex)"""

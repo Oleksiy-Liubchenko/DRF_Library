@@ -25,6 +25,7 @@ class ManagingUser(generics.RetrieveUpdateAPIView):
 class UsersListView(APIView):
     """List of all users for users who have is_staff = True"""
     permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
 
     def get(self, request):
         if not request.user.is_staff:
